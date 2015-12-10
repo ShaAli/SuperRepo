@@ -1,7 +1,7 @@
 // Shanjeed Ali
 // APCS1 pd10
-// HW43 -- This or That
-// 2015-12-08
+// HW45 -- Come Together
+// 2015-12-10
 
 //skeleton file for class Binary
 
@@ -163,6 +163,10 @@ public class Binary implements Comparable{
 
     public int compareTo( Object other ) {
 	ClassCastException e = new ClassCastException("Can't cast " + other.getClass() + " to Comparable");
+	NullPointerException n = new NullPointerException("Input is null");
+	if (other==null){
+	    throw n;
+	}
 	if (other instanceof Comparable){
 	    if (other instanceof Rational){
 		return _decNum - (int)((Rational)other).floatValue();

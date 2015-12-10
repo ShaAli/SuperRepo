@@ -1,7 +1,7 @@
-// Team Ye Ali - Joel Ye, Shanjeed Ali
-//APCS1 pd10
-//HW44 - This or That or Fourteen Other Things
-//2015 - 12 - 08
+// Shanjeed Ali
+// APCS1 pd10
+// HW45 -- Come Together
+// 2015-12-10
 
 public class Hexadecimal implements Comparable{
 
@@ -154,6 +154,10 @@ public class Hexadecimal implements Comparable{
       =============================================*/
     public int compareTo( Object other ) {
 	ClassCastException e = new ClassCastException("Can't cast " + other.getClass() + " to Comparable");
+	NullPointerException n = new NullPointerException("Input is null");
+	if (other==null){
+	    throw n;
+	}
 	if (other instanceof Comparable){
 	    if (other instanceof Rational){
 		return _decNum - (int)((Rational)other).floatValue();

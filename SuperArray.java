@@ -1,7 +1,7 @@
-// Team Blah - Shanjeed Ali, Shamaul Dilmohamed 
+// Shanjeed Ali
 // APCS1 pd10
-// HW42 -- Array of Titanium
-// 2015-12-06
+// HW45 -- Come Together
+// 2015-12-10
 
 /*****************************
  * class SuperArray --  A wrapper class for an array. 
@@ -119,21 +119,105 @@ public class SuperArray{
 	return _size;
     }
 
+    //searches the array of Comparables for the input and returns the index of its first occurrence
+    public int linSearch(Comparable c){
+	if (_lastPos>-1){
+	    for(int ctr=0; ctr<=_lastPos; ctr++){
+		if (_data[ctr].equals(c)){
+		    return ctr;
+		}
+	    }
+	}
+	return -1;	
+    }
+
+    public boolean isSorted(){
+	boolean boo=true;
+	for(int ctr=1;ctr<=_lastPos; ctr++){
+	    if ((_data[ctr].compareTo(_data[ctr-1]))<0){
+		boo=false;
+	    }
+	}
+	return boo;
+    }
+
     //main method for testing
     public static void main( String[] args ) 
     {
-	/*	SuperArray curtis = new SuperArray();
+	SuperArray curtis = new SuperArray();
 
-	SuperArray happy = new SuperArray();
-	System.out.println("Original happy:\n" + happy + "Ints added to happy:\n");
-	happy.add(30);
-	happy.add(31);
-	happy.add(32);
-	happy.add(33);
+	SuperArray lee = new SuperArray();
+	System.out.println("Original lee:\n" + lee);
+
+	System.out.println("\nRational numbers added to lee:\n");
+	Rational r1= new Rational(15,3);
+	Rational r2= new Rational(7,13);
+	Rational r3= new Rational (100,20);
+	lee.add(r1);
+	lee.add(r2);
+	lee.add(r3);
+	System.out.println(lee);
+
+	System.out.println("\nBinary numbers added to lee:\n");
+	Binary b1= new Binary(5);
+	Binary b2= new Binary(63);
+	Binary b3= new Binary(100);
+	lee.add(b1);
+	lee.add(b2);
+	lee.add(b3);
+	System.out.println(lee);
+
+	System.out.println("\nHexadecimal numbers added to lee:\n");
+	Hexadecimal h1= new Hexadecimal(5);
+	Hexadecimal h2= new Hexadecimal(63);
+	Hexadecimal h3= new Hexadecimal(100);
+	lee.add(h1);
+	lee.add(h2);
+	lee.add(h3);
+	System.out.println(lee);
+
+	System.out.println("\nTesting add at index and remove...");
+	lee.add(0,b3);
+	System.out.println("add at index:  " + lee);
+	lee.remove(0);
+	System.out.println("remove:  " + lee);
+
+	System.out.println("\nTesting compareTo methods...");
+	System.out.println("r1 and r2: "+r1.compareTo(r2));//pos
+	System.out.println("r1 and r3: "+r1.compareTo(r3));//0
+	System.out.println("r1 and b1: "+r1.compareTo(b1));//0
+	System.out.println("b1 and r1: "+b1.compareTo(r1));//0
+	System.out.println("b1 and r2: "+b1.compareTo(r2));//pos
+	System.out.println("b1 and b2: "+b1.compareTo(b2));//neg
+	System.out.println("h1 and r1: "+h1.compareTo(r1));//0
+	System.out.println("h1 and r3: "+h1.compareTo(r3));//0
+	System.out.println("h2 and r2: "+h2.compareTo(r2));//pos
+
+	System.out.println("\nTesting linSearch...");
+	Binary b4= new Binary(63);
+	Hexadecimal h4= new Hexadecimal(63);
+	System.out.println(lee.linSearch(r3));
+	System.out.println(lee.linSearch(b4));
+	System.out.println(lee.linSearch(h4));
+
+	System.out.println("\nTesting isSorted...");
+	System.out.println(lee.isSorted());
+	Binary a=new Binary(23);
+	Hexadecimal b= new Hexadecimal(29);
+	Rational c= new Rational(1000,30);
+	SuperArray mayfield = new SuperArray();
+	mayfield.add(a);
+	mayfield.add(b);
+	mayfield.add(c);
+	System.out.println(mayfield.isSorted());
+
+	System.out.println(a.compareTo(null));
+   
+	/*	happy.add(33);
 	happy.add(34);
-	happy.add(0,118);
-	System.out.println(happy);
-	happy.remove(0);
+	happy.add(0,118);*/
+	//System.out.println(happy);
+	/*	happy.remove(0);
 	System.out.println("Int at index0 of happy has been removed:\n"+ happy);
 	System.out.println("happy has "+happy.size()+" meaningful ints.");
 	System.out.println("Testing get...\n"+ happy.get(0));
@@ -145,8 +229,8 @@ public class SuperArray{
 	for( int i = 0; i < curtis._data.length; i++ ) {
 	    curtis.set(i,i*2);
 	    curtis._size++; //necessary bc no add() method yet
-	    }
-	*/
+	    }*/
+	
 	/*SuperArray mayfield = new SuperArray();
 	System.out.println("Printing empty SuperArray mayfield...");
 	System.out.println(mayfield);

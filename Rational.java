@@ -1,7 +1,8 @@
-// Team Blah -- Shanjeed Ali, Shamaul Dilmohamed
+// Shanjeed Ali
 // APCS1 pd10
-// HW41 -- In America, the Driver Sits on the Left
-// 2015-12-04
+// HW45 -- Come Together
+// 2015-12-10
+
 public class Rational implements Comparable {
    
     private int numer;
@@ -106,6 +107,10 @@ public class Rational implements Comparable {
 
     public int compareTo( Object other ) {
 	ClassCastException e = new ClassCastException("Can't cast " + other.getClass() + " to Comparable");
+	NullPointerException n = new NullPointerException("Input is null");
+	if (other==null){
+	    throw n;
+	}
 	if (other instanceof Comparable){
 	    if (other instanceof Rational){
 		Rational r=(Rational)other; //typecasts the object as an instance of Rational
