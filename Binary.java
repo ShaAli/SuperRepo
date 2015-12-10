@@ -5,11 +5,11 @@
 
 //skeleton file for class Binary
 
-public class Binary {
+public class Binary implements Comparable{
 
     private int _decNum;
     private String _binNum;
-
+    
 
     /*=====================================
       default constructor
@@ -20,7 +20,7 @@ public class Binary {
         _decNum=0;
 	_binNum="0";
     }
-
+    
 
     /*=====================================
       overloaded constructor
@@ -31,7 +31,7 @@ public class Binary {
 	_decNum=n;
 	_binNum=decToBin(n);
     }
-
+    
 
     /*=====================================
       overloaded constructor
@@ -86,7 +86,8 @@ public class Binary {
       =====================================*/
     public static String decToBinR( int n ) {
 	while(n>0){
-	    return ""+decToBinR(n/2)+n%2;// strings together the numerals (n/2) mod 2 and n mod 2 until n=0
+	    return ""+decToBinR(n/2)+n%2;
+	    // strings together the numerals (n/2) mod 2 and n mod 2 until n=0
 	}
 	return "";
     }
@@ -107,7 +108,8 @@ public class Binary {
 	int ret=0;
         for(int c=0;c<s.length();c++){
 	    ret=ret+(Integer.parseInt(s.substring(c,c+1))*(int)Math.pow(2,c));
-	}//moves through s from left to right, multiply the binary digit with a power of 2
+	}
+	//moves through s from left to right, multiply the binary digit with a power of 2
 	return ret;
     }
 
@@ -126,10 +128,16 @@ public class Binary {
     public static int binToDecR( String s ) {
 	while (s.length()>0){
 	    return (Integer.parseInt(s.substring(0,1))*(int)Math.pow(2,(s.length()-1))) + binToDecR(s.substring(1,s.length()));
-	}//runs binToDecR each time wth the leftmost numeral removed (it is removed after it is used to generate a value)
+	}
+	//runs binToDecR each time wth the leftmost numeral removed (it is removed after it is used to generate a value)
 	return +0;
     }
 
+
+    //accessor
+    public int getDec(){
+	return _decNum;
+    }
 
     /*=============================================
       boolean equals(Object) -- tells whether 2 Objs are equivalent
@@ -138,8 +146,11 @@ public class Binary {
       Object), or if this and other represent equal binary values
       =============================================*/
     public boolean equals( Object other ) {
-	Binary binother = (Binary)other;
-	return((this==binother) || (this.compareTo(other))==0);
+	if (other instanceof Binary){
+	    Binary binother = (Binary)other;
+	    return((this==binother) || (this.compareTo(other))==0);
+	}
+	else {return false;}
     }
 
 
@@ -149,17 +160,23 @@ public class Binary {
       post: Returns 0 if this Object is equal to the input Object,
       negative integer if this<input, positive integer otherwise
       =============================================*/
+
     public int compareTo( Object other ) {
-	Binary binother = (Binary)other;
-	if (binother._decNum==_decNum){
-	    return 0;
-	}
-	else if (binother._decNum>_decNum){
-	    return -1;
+	ClassCastException e = new ClassCastException("Can't cast " + other.getClass() + " to Comparable");
+	if (other instanceof Comparable){
+	    if (other instanceof Rational){
+		return _decNum - (int)((Rational)other).floatValue();
+	    }
+	    else if(other instanceof Binary){
+		return _decNum - ((Binary)other)._decNum;
+	    }
+	    else /*if(other instanceof Hexadecimal)*/{
+		return _decNum - ((Hexadecimal)other).getDec();
+	    }
 	}
 	else {
-	    return 1;
-	}	
+	    throw e;
+	}
     }
 
 

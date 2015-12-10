@@ -3,7 +3,7 @@
 //HW44 - This or That or Fourteen Other Things
 //2015 - 12 - 08
 
-public class Hexadecimal {
+public class Hexadecimal implements Comparable{
 
     private final static String HEXDIGITS = "0123456789ABCDEF";
     private int _decNum;
@@ -130,6 +130,10 @@ public class Hexadecimal {
 	return HEXDIGITS.indexOf(s.substring(s.length()-1)) + 16 * hexToDecR(s.substring(0,s.length()-1));//takes the value of the last digit in s and multiplies it by 16*hexToDecR(s minus the last digit)
     }
 
+    //accessor
+    public int getDec(){
+	return _decNum;
+    }
 
     /*=============================================
       boolean equals(Object) -- tells whether 2 Objs are equivalent
@@ -149,11 +153,21 @@ public class Hexadecimal {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
-		ClassCastException e = new ClassCastException("Can't cast " + other.getClass() + " to " + this.getClass());
-	if (other instanceof Hexadecimal)
-	    return _decNum - ((Hexadecimal)other)._decNum;
-	else 
+	ClassCastException e = new ClassCastException("Can't cast " + other.getClass() + " to Comparable");
+	if (other instanceof Comparable){
+	    if (other instanceof Rational){
+		return _decNum - (int)((Rational)other).floatValue();
+	    }
+	    else if(other instanceof Binary){
+		return _decNum - ((Binary)other).getDec();
+	    }
+	    else /*if(other instanceof Hexadecimal)*/{
+		return _decNum - ((Hexadecimal)other)._decNum;
+	    }
+	}
+	else {
 	    throw e;
+	}
     }
 
 

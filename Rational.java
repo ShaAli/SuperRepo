@@ -103,13 +103,28 @@ public class Rational implements Comparable {
     }
     
     //determines equality or inequality using cross-multipication
-    public int compareTo(Object o){
-	Rational r=(Rational)o; //typecasts the object as an instance of Rational
-	int here = numer * r.denom;
-	int there = denom * r.numer;
-	if (here == there) {return 0;}
-	else if (there > here) {return -1;}
-	else return 1;
+
+    public int compareTo( Object other ) {
+	ClassCastException e = new ClassCastException("Can't cast " + other.getClass() + " to Comparable");
+	if (other instanceof Comparable){
+	    if (other instanceof Rational){
+		Rational r=(Rational)other; //typecasts the object as an instance of Rational
+		int here = numer * r.denom;
+		int there = denom * r.numer;
+		if (here == there) {return 0;}
+		else if (there > here) {return -1;}
+		else return 1;
+	    }
+	    else if(other instanceof Binary){
+		return (int)floatValue() - ((Binary)other).getDec();
+	    }
+	    else /*if(other instanceof Hexadecimal)*/{
+		return (int)floatValue() - ((Hexadecimal)other).getDec();
+	    }
+	}
+	else {
+	    throw e;
+	}
     }
     
     public boolean equals(Object val){
@@ -117,7 +132,7 @@ public class Rational implements Comparable {
 	    Rational ra=(Rational)val;
 	    return (0 == compareTo(ra));
 	}
-	else return false;
+	else {return false;}
     }
     
     public static void main(String[] args){
